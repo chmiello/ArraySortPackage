@@ -43,9 +43,126 @@ class ArraySortTest extends TestCase
      *
      * @return void
      */
-    public function testgetItemsMethod()
+    public function testGetItemsMethod()
     {
         $instance = new ArraySort(self::NO_SORTED_ARRAY);
         $this->assertTrue(self::NO_SORTED_ARRAY === $instance->getItems());
     }
+
+    /**
+     * Test orderBy method with ASC param
+     *
+     * @return void
+     */
+    public function testMethodOrderByWithAsc()
+    {
+        $instance = new ArraySort(self::NO_SORTED_ARRAY);
+        $instance->orderBy('name', ArraySort::ASC);
+
+        $conditionTable = [
+            ['column' => 'name', 'direction' => 1],
+        ];
+
+        $this->assertTrue($conditionTable === $instance->getConditions());
+    }
+
+    /**
+     * Test orderBy method with DESC param
+     *
+     * @return void
+     */
+    public function testMethodOrderByWithDesc()
+    {
+        $instance = new ArraySort(self::NO_SORTED_ARRAY);
+        $instance->orderBy('name', ArraySort::DESC);
+
+        $conditionTable = [
+            ['column' => 'name', 'direction' => 2],
+        ];
+
+        $this->assertTrue($conditionTable === $instance->getConditions());
+    }
+
+    /**
+     * Test asc method
+     *
+     * @return void
+     */
+    public function testMethodAsc()
+    {
+        $instance = new ArraySort(self::NO_SORTED_ARRAY);
+        $instance->asc('name');
+
+        $conditionTable = [
+            ['column' => 'name', 'direction' => 1],
+        ];
+
+        $this->assertTrue($conditionTable === $instance->getConditions());
+    }
+
+    /**
+     * Test desc method
+     *
+     * @return void
+     */
+    public function testMethodDesc()
+    {
+        $instance = new ArraySort(self::NO_SORTED_ARRAY);
+        $instance->desc('name');
+
+        $conditionTable = [
+            ['column' => 'name', 'direction' => 2],
+        ];
+
+        $this->assertTrue($conditionTable === $instance->getConditions());
+    }
+
+    /**
+     * Test return instance orderBy method with ASC direction
+     *
+     * @return void
+     */
+    public function testReturnInstanceOrderByMethodWithAsc()
+    {
+        $instance = new ArraySort(self::NO_SORTED_ARRAY);
+        $returnInstance = $instance->orderBy('name', ArraySort::ASC);
+        $this->assertInstanceOf(ArraySort::class, $returnInstance);
+    }
+
+    /**
+     * Test return instance orderBy method with DESC direction
+     *
+     * @return void
+     */
+    public function testReturnInstanceOrderByMethodWithDesc()
+    {
+        $instance = new ArraySort(self::NO_SORTED_ARRAY);
+        $returnInstance = $instance->orderBy('name', ArraySort::DESC);
+        $this->assertInstanceOf(ArraySort::class, $returnInstance);
+    }
+
+    /**
+     * Test return instance asc method
+     *
+     * @return void
+     */
+    public function testReturnInstanceAsc()
+    {
+        $instance = new ArraySort(self::NO_SORTED_ARRAY);
+        $returnInstance = $instance->asc('name');
+        $this->assertInstanceOf(ArraySort::class, $returnInstance);
+    }
+
+    /**
+     * Test return instance asc method
+     *
+     * @return void
+     */
+    public function testReturnInstanceDesc()
+    {
+        $instance = new ArraySort(self::NO_SORTED_ARRAY);
+        $returnInstance = $instance->desc('name');
+        $this->assertInstanceOf(ArraySort::class, $returnInstance);
+    }
+
 }
