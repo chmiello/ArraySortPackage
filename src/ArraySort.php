@@ -2,6 +2,8 @@
 
 namespace Chmiello\ArraySortPackage;
 
+use phpDocumentor\Reflection\Types\Boolean;
+
 /**
  * Sorting multidimensional array in PHP
  *
@@ -70,10 +72,12 @@ class ArraySort
      * @param string $column    field in array
      * @param string $direction 1 - asc | 2 - desc
      *
+     * @throws \Exception
      * @return ArraySort
      */
     public function orderBy(string $column, $direction): ArraySort
     {
+        $this->fieldExists($column);
         $this->_conditions[] = ['column' => $column, 'direction' => $direction];
         return $this;
     }
@@ -83,6 +87,7 @@ class ArraySort
      *
      * @param string $column - field in array
      *
+     * @throws \Exception
      * @return ArraySort
      */
     public function asc($column): ArraySort
@@ -95,6 +100,7 @@ class ArraySort
      *
      * @param string $column - field in array
      *
+     * @throws \Exception
      * @return ArraySort
      */
     public function desc($column): ArraySort
@@ -110,5 +116,24 @@ class ArraySort
     public function ddItems(): void
     {
         dump($this->getItems());
+    }
+
+    /**
+     * Check that exists field in array
+     *
+     * @param string $fieldName Array field name
+     *
+     * @throws \Exception
+     * @return bool
+     */
+    public function fieldExists(string $fieldName): bool
+    {
+        foreach ($this->_items as $index => $item) {
+            if (!isset($item[$fieldName])) {
+                throw new \Exception($index . ': has no field ' . $fieldName);
+            }
+        }
+
+        return true;
     }
 }

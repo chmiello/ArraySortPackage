@@ -165,4 +165,30 @@ class ArraySortTest extends TestCase
         $this->assertInstanceOf(ArraySort::class, $returnInstance);
     }
 
+
+    /**
+     * Test method fieldExists, expected true
+     *
+     * @throws Exception
+     * @return void
+     */
+    public function testFieldExistsMethodReturnTrue()
+    {
+        $instance = new ArraySort(self::NO_SORTED_ARRAY);
+        $this->assertTrue($instance->fieldExists('name'));
+    }
+
+    /**
+     * Test method fieldExists, expected false
+     *
+     * @throws Exception
+     * @return void
+     */
+    public function testFieldExistsMethodReturnException()
+    {
+        $instance = new ArraySort(self::NO_SORTED_ARRAY);
+        $this->expectException(Exception::class);
+        $instance->fieldExists('other');
+
+    }
 }
