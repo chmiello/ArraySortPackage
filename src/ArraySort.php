@@ -2,8 +2,6 @@
 
 namespace Chmiello\ArraySortPackage;
 
-use phpDocumentor\Reflection\Types\Boolean;
-
 /**
  * Sorting multidimensional array in PHP
  *
