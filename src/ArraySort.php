@@ -16,7 +16,14 @@ namespace Chmiello\ArraySortPackage;
 class ArraySort
 {
 
+    /**
+     * Ascending
+     */
     const ASC = 1;
+
+    /**
+     * Descending
+     */
     const DESC = 2;
 
     /**
@@ -133,5 +140,91 @@ class ArraySort
         }
 
         return true;
+    }
+
+    /**
+     * Sort call
+     *
+     * @return $this
+     */
+    public function sort()
+    {
+        $this->_items = $this->_sortRecursively();
+        return $this;
+    }
+
+    /**
+     * Recursive sorting method
+     *
+     * @param array|null $conditions Array with conditions
+     * @param array|null $items      Items
+     * @param bool       $repeat     repeated call
+     *
+     * @return array
+     */
+    private function _sortRecursively($conditions = null, $items = null, $repeat = false)
+    {
+        if (is_null($conditions)) {
+            $conditions = $this->_conditions;
+        }
+
+        if (is_null($items)) {
+            $items = $this->_items;
+        }
+
+        foreach ($conditions as $conditionItem) {
+            $tmpArrayValue = [];
+            foreach ($items as $item) {
+                $key = (string)$item[$conditionItem['column']];
+                if (!isset($tmpArrayValue[$key])) {
+                    $tmpArrayValue[$key] = [];
+                }
+                $tmpArrayValue[$key][] = $item;
+            }
+
+            if ($conditionItem['direction'] == self::ASC) {
+                ksort($tmpArrayValue);
+            } else {
+                krsort($tmpArrayValue);
+            }
+
+            $newConditions = array_slice($conditions, 1);
+            if (count($newConditions)) {
+                foreach ($tmpArrayValue as $index => $newItems) {
+                    $tmpArrayValue[$index] = $this->_sortRecursively($newConditions, $newItems, true);
+                }
+            }
+            if ($repeat) {
+                return $tmpArrayValue;
+            } else {
+                return $this->_flatArray($tmpArrayValue);
+            }
+        }
+
+        return [];
+    }
+
+
+    /**
+     * Flattening the array after sorting
+     *
+     * @param array $array sorted array
+     * @param int   $level level of nesting
+     *
+     * @return array
+     */
+    private function _flatArray(array $array, int $level = 0)
+    {
+        if ($level == count($this->_conditions)) {
+            return $array;
+        }
+
+        $sorted = [];
+
+        foreach ($array as $index => $item) {
+            $sorted = array_merge($sorted, $this->_flatArray($item, $level + 1));
+        }
+
+        return $sorted;
     }
 }

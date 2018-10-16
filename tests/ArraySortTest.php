@@ -29,6 +29,52 @@ class ArraySortTest extends TestCase
     ];
 
     /**
+     * Array with sorting items
+     * ASC time
+     */
+    const SORTED_ONE_DIMENSION = [
+        ['name' => 'Valentino', 'surname' => 'Rossi', 'time' => 11.21],
+        ['name' => 'Marco', 'surname' => 'Melandri', 'time' => 11.21],
+        ['name' => 'Francesco', 'surname' => 'Bagnaia', 'time' => 11.23],
+        ['name' => 'Giacomo', 'surname' => 'Agostini', 'time' => 11.25],
+        ['name' => 'Max', 'surname' => 'Biaggi', 'time' => 11.25],
+        ['name' => 'Alessandro', 'surname' => 'Tonucci', 'time' => 11.25],
+        ['name' => 'Anthony', 'surname' => 'Groppi', 'time' => 11.48],
+        ['name' => 'Marco', 'surname' => 'Bezzecchi', 'time' => 12.01],
+    ];
+
+    /**
+     * Array with sorting items
+     * ASC time
+     * ASC surname
+     */
+    const SORTED_MULTI_DIMENSION_VER_1 = [
+        ['name' => 'Marco', 'surname' => 'Melandri', 'time' => 11.21],
+        ['name' => 'Valentino', 'surname' => 'Rossi', 'time' => 11.21],
+        ['name' => 'Francesco', 'surname' => 'Bagnaia', 'time' => 11.23],
+        ['name' => 'Giacomo', 'surname' => 'Agostini', 'time' => 11.25],
+        ['name' => 'Max', 'surname' => 'Biaggi', 'time' => 11.25],
+        ['name' => 'Alessandro', 'surname' => 'Tonucci', 'time' => 11.25],
+        ['name' => 'Anthony', 'surname' => 'Groppi', 'time' => 11.48],
+        ['name' => 'Marco', 'surname' => 'Bezzecchi', 'time' => 12.01],
+    ];
+    /**
+     * Array with sorting items
+     * ASC time
+     * DESC surname
+     */
+    const SORTED_MULTI_DIMENSION_VER_2 = [
+        ['name' => 'Valentino', 'surname' => 'Rossi', 'time' => 11.21],
+        ['name' => 'Marco', 'surname' => 'Melandri', 'time' => 11.21],
+        ['name' => 'Francesco', 'surname' => 'Bagnaia', 'time' => 11.23],
+        ['name' => 'Alessandro', 'surname' => 'Tonucci', 'time' => 11.25],
+        ['name' => 'Max', 'surname' => 'Biaggi', 'time' => 11.25],
+        ['name' => 'Giacomo', 'surname' => 'Agostini', 'time' => 11.25],
+        ['name' => 'Anthony', 'surname' => 'Groppi', 'time' => 11.48],
+        ['name' => 'Marco', 'surname' => 'Bezzecchi', 'time' => 12.01],
+    ];
+
+    /**
      * Test create object
      *
      * @return void
@@ -190,5 +236,49 @@ class ArraySortTest extends TestCase
         $this->expectException(Exception::class);
         $instance->fieldExists('other');
 
+    }
+
+    /**
+     * Test one dimension
+     * ASC time
+     *
+     * @throws Exception
+     * @return void
+     */
+    public function testOneDimensionSort()
+    {
+        $instance = new ArraySort(self::NO_SORTED_ARRAY);
+        $instance->asc('time')->sort();
+        $this->assertTrue($instance->getItems() === self::SORTED_ONE_DIMENSION);
+    }
+
+    /**
+     * Test multi dimensions versions 1
+     * ASC time
+     * ASC surname
+     *
+     * @throws Exception
+     * @return void
+     */
+    public function testMultiDimensionsVer1Sort()
+    {
+        $instance = new ArraySort(self::NO_SORTED_ARRAY);
+        $instance->asc('time')->asc('surname')->sort();
+        $this->assertTrue($instance->getItems() === self::SORTED_MULTI_DIMENSION_VER_1);
+    }
+
+    /**
+     * Test multi dimensions versions 2
+     * ASC time
+     * DESC surname
+     *
+     * @throws Exception
+     * @return void
+     */
+    public function testMultiDimensionsVer2Sort()
+    {
+        $instance = new ArraySort(self::NO_SORTED_ARRAY);
+        $instance->asc('time')->desc('surname')->sort();
+        $this->assertTrue($instance->getItems() === self::SORTED_MULTI_DIMENSION_VER_2);
     }
 }
