@@ -13,7 +13,6 @@
       "email": "bartek@chmiello.pl"
     }
   ],
-  "type": "project",
   "require": {
     "php": ">=7.2"
   },
