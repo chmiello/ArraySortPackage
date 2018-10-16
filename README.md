@@ -28,7 +28,7 @@ $noSortedData = [
     ['name' => 'Alessandro', 'surname' => 'Tonucci', 'time' => 11.25]
     ];
 
-    $sortedArray = (new ArraySort($noSortedData))->asc('time')->asc('surname')->sort()->getItems();
+    $sortedArray = (new ArraySort($noSortedData))->asc('time')->desc('surname')->sort()->getItems();
     
     dump($sortedArray);
 ?>
