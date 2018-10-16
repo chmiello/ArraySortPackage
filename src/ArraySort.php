@@ -114,16 +114,6 @@ class ArraySort
     }
 
     /**
-     * Dump items
-     *
-     * @return void
-     */
-    public function ddItems(): void
-    {
-        dump($this->getItems());
-    }
-
-    /**
      * Check that exists field in array
      *
      * @param string $fieldName Array field name

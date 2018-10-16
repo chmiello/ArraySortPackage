@@ -30,6 +30,6 @@ $noSortedData = [
 
     $sortedArray = (new ArraySort($noSortedData))->asc('time')->desc('surname')->sort()->getItems();
     
-    dump($sortedArray);
+    var_dump($sortedArray);
 ?>
 ```
