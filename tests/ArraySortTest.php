@@ -51,7 +51,7 @@ class ArraySortTest extends TestCase
 
     /**
      * Test orderBy method with ASC param
-     *
+     * @throws Exception
      * @return void
      */
     public function testMethodOrderByWithAsc()
@@ -68,7 +68,7 @@ class ArraySortTest extends TestCase
 
     /**
      * Test orderBy method with DESC param
-     *
+     * @throws Exception
      * @return void
      */
     public function testMethodOrderByWithDesc()
@@ -85,7 +85,7 @@ class ArraySortTest extends TestCase
 
     /**
      * Test asc method
-     *
+     * @throws Exception
      * @return void
      */
     public function testMethodAsc()
@@ -102,7 +102,7 @@ class ArraySortTest extends TestCase
 
     /**
      * Test desc method
-     *
+     * @throws Exception
      * @return void
      */
     public function testMethodDesc()
@@ -119,7 +119,7 @@ class ArraySortTest extends TestCase
 
     /**
      * Test return instance orderBy method with ASC direction
-     *
+     * @throws Exception
      * @return void
      */
     public function testReturnInstanceOrderByMethodWithAsc()
@@ -131,7 +131,7 @@ class ArraySortTest extends TestCase
 
     /**
      * Test return instance orderBy method with DESC direction
-     *
+     * @throws Exception
      * @return void
      */
     public function testReturnInstanceOrderByMethodWithDesc()
@@ -143,7 +143,7 @@ class ArraySortTest extends TestCase
 
     /**
      * Test return instance asc method
-     *
+     * @throws Exception
      * @return void
      */
     public function testReturnInstanceAsc()
@@ -155,7 +155,7 @@ class ArraySortTest extends TestCase
 
     /**
      * Test return instance asc method
-     *
+     * @throws Exception
      * @return void
      */
     public function testReturnInstanceDesc()
